@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext.jsx';
+import profile from '../assets/img/landing/profile.jpg'
+import banner from '../assets/img/landing/banner_1.png'
 const Home = () => {
   const navigate = useNavigate();
   const {doctors} = useContext(AppContext)
@@ -12,7 +14,7 @@ const Home = () => {
   {/* Background image */}
   <div className="absolute inset-0 z-0">
     <img
-      src="../assets/img/landing/banner_1.png"
+      src={banner}
       alt="Hero Background"
       className="w-full h-full object-cover"
     />
@@ -77,7 +79,7 @@ const Home = () => {
           >
             <div className="relative">
               <img
-                src={item.image}
+                src={profile}
                 alt={item.name}
                 className="w-full h-52 object-cover rounded-md mb-3"
               />
