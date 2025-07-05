@@ -5,7 +5,7 @@ const Footer = () => {
   return (
    <footer className="relative bg-cover bg-center text-white px-6 py-10 overflow-hidden">
   {/* Background image */}
-  <div className="absolute inset-0 bg-[url('./src/assets/img/landing/banner_dental.png')] bg-cover bg-center z-0"></div>
+  <div className="absolute inset-0 bg-[url('../assets/img/landing/banner_dental.png')] bg-cover bg-center z-0"></div>
 
   {/* Light overlay for contrast (not too dark) */}
   <div className="absolute inset-0 bg-black/30 z-0"></div>
@@ -14,7 +14,7 @@ const Footer = () => {
   <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left md:text-left">
     {/* Logo and Description */}
     <div>
-      <img src="../src/assets/img/landing/sibi_logo.png" className='w-30 cursor-pointer p-2 rounded footer-img mb-2'/>
+      <img src="../assets/img/landing/sibi_logo.png" className='w-30 cursor-pointer p-2 rounded footer-img mb-2'/>
     </div>
 
     {/* Links */}

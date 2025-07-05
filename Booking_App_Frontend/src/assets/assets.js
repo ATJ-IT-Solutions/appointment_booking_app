@@ -1,4 +1,4 @@
-var doc1 = './src/assets/img/landing/profile.jpg';
+var doc1 = '../assets/img/landing/profile.jpg';
 
 export const doctors = [
     {
@@ -6,7 +6,7 @@ export const doctors = [
         name: 'Dr. Sibi Varghese',
         image : doc1,
         degree: 'BDS',
-        experience: '4 years',
+        experience: '5+ years',
         about: 'Dr. Sibi Varghese is an experienced doctor for dental problems',
         address: 'Haripad,Kerala'
     }

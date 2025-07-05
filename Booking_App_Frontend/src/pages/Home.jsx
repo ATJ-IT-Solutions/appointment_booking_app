@@ -12,7 +12,7 @@ const Home = () => {
   {/* Background image */}
   <div className="absolute inset-0 z-0">
     <img
-      src="./src/assets/img/landing/banner_1.png"
+      src="../assets/img/landing/banner_1.png"
       alt="Hero Background"
       className="w-full h-full object-cover"
     />
