@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext.jsx';
-import profile from '../assets/img/landing/profile.jpg'
-import banner from '../assets/img/landing/banner_1.png'
+import profile from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828973/profile_r0ndlc.jpg'
+import banner from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828863/banner_1_bb0urc.png'
 const Home = () => {
   const navigate = useNavigate();
   const {doctors} = useContext(AppContext)

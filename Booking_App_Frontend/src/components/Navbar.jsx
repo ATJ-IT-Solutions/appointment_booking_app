@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext';
-import logo from '../assets/img/landing/sibi_logo.png'
-import avatar from '../assets/img/landing/avatar.png'
-import dropdown from '../assets/img/landing/dropdown.jpg'
-import menuicon from '../assets/img/landing/menu_icon.png'
-import closeicon from '../assets/img/landing/close_icon.png'
+import logo from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829062/sibi_logo_lc6q6h.png'
+import avatar from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828936/avatar_zkcd1w.png'
+import dropdown from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829099/dropdown_xxndvz.webp'
+import menuicon from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829045/menu_icon_qylkov.webp'
+import closeicon from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829107/close_icon_vu6rrc.png'
 
 
 const Navbar = () => {

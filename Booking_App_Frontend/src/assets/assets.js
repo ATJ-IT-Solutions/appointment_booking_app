@@ -1,4 +1,4 @@
-var doc1 = '../assets/img/landing/profile.jpg';
+var doc1 = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828973/profile_r0ndlc.jpg';
 
 export const doctors = [
     {
