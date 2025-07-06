@@ -5,7 +5,6 @@ import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
 import adminRouter from './routes/adminRoute.js'
 import userRouter from './routes/userRoute.js'
-import serverless from 'serverless-http'
 
 //app config
 const app = express()
@@ -26,5 +25,4 @@ app.get('/',(req,res)=>{
     res.send("API working")
 })
 
-module.exports = app
-module.exports.handler = serverless(app)
+app.listen(port, ()=> console.log("Server Started",port))
