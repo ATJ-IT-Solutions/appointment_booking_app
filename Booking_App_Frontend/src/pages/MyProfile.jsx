@@ -60,7 +60,7 @@ const MyProfile = () => {
           <div className="absolute top-12">
             <div className="relative w-24 h-24 mx-auto">
               <img
-                src="./src/assets/img/landing/avatar.png"
+                src="https://res.cloudinary.com/duz6kitlg/image/upload/v1751828936/avatar_zkcd1w.png"
                 alt={userData.name}
                 className="w-24 h-24 rounded-full border-4 border-white object-cover shadow-md"
               />

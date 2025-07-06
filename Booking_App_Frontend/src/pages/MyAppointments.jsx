@@ -74,7 +74,7 @@ const MyAppointments = () => {
                 {/* Left Side */}
                 <div className="flex items-center gap-4">
                   <img
-                    src={item.docData.image}
+                    src="https://res.cloudinary.com/duz6kitlg/image/upload/v1751828973/profile_r0ndlc.jpg"
                     alt={item.docData.name}
                     className="w-14 h-14 rounded-full object-cover border-2 border-gray-200"
                   />
