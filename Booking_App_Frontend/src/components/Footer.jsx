@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import footer from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829160/banner_dental_czv1gn.png'
-import logo from 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829062/sibi_logo_lc6q6h.png'
+const footer ='https://res.cloudinary.com/duz6kitlg/image/upload/v1751829160/banner_dental_czv1gn.png'
+const logo = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829062/sibi_logo_lc6q6h.png'
 
 
 const Footer = () => {
