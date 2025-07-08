@@ -58,9 +58,8 @@ const logout = ()=>{
                 <img className='w-7 cursor-pointer' onClick={()=>setShowMenu(false)} alt='b' src={closeicon}/>
             </div>
             <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
-                <NavLink className='px-4 py-2 rounded inline-block'>Home</NavLink>
-                <NavLink className='px-4 py-2 rounded inline-block'>All Doctors</NavLink>
-                <NavLink className='px-4 py-2 rounded inline-block'>About</NavLink>
+                <NavLink to='/' className='px-4 py-2 rounded inline-block'>Home</NavLink>
+                <NavLink to='/contact' className='px-4 py-2 rounded inline-block'>About</NavLink>
             </ul>
         </div>
         </div>
