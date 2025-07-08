@@ -26,10 +26,10 @@ const Home = () => {
     <div className="max-w-2xl">
       <p className="text-sm uppercase tracking-wide mb-2"></p>
       <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 mt-15 md:mt-0">
-        Our experts make <br /> your health better
+        Our experts make your <br />health better
       </h1>
       <p className="mb-8 text-lg text-gray-200">
-        Over a long period, we have provided hundreds of thousands of care services to serve the needs of our patients.
+        Over a long period, we have provided hundreds of care services to serve the needs of our patients.
       </p>
       <div className="flex gap-4 flex-wrap items-center mb-10">
         <a
@@ -44,28 +44,31 @@ const Home = () => {
       <div className="flex flex-wrap gap-10 text-white text-left">
        
         <div>
-          <h3 className="text-3xl font-bold">10+</h3>
+          <h3 className="text-3xl font-bold">5+</h3>
           <p className="text-sm text-gray-300">Years experience</p>
+        </div>
+        <div>
+          <h3 className="text-3xl font-bold">600+</h3>
+          <p className="text-sm text-gray-300">Consults done</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="team" className="py-24 bg-white">
+<section id="team" className="py-24 bg-gradient-to-br from-white via-blue-50 to-white">
   <div className="max-w-6xl mx-auto px-4">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div className="grid md:grid-cols-2 gap-12 items-center">
       
-      {/* LEFT: Intro Text */}
-      <div>
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">👩‍⚕️ Our Doctors</h2>
-        <p className="text-gray-600 text-lg mb-6">
-          Meet our experienced medical professionals, ready to help you with personalized and compassionate care across multiple specialties.
+     <div>
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-6">👩‍⚕️ Our Doctors</h2>
+        <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+          Meet our experienced medical professionals, dedicated to providing compassionate and personalized care across various specialties.
         </p>
-        <ul className="list-disc pl-5 text-gray-600">
-          <li>Verified and rated experts</li>
-          <li>Hundreds of successful consults</li>
-          <li>Book appointments with ease</li>
+        <ul className="space-y-3 text-gray-700 text-base pl-5 list-disc">
+          <li>Verified and top-rated experts</li>
+          <li>Thousands of successful consultations</li>
+          <li>Book appointments easily with just a click</li>
         </ul>
       </div>
 
@@ -103,8 +106,7 @@ const Home = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3" />
               </svg>
-              Book Slot Now
-            </button>
+              Book Your Slot </button>
           </div>
         ))}
       </div>

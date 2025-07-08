@@ -22,46 +22,60 @@ const fetchDocInfo = async ()=>{
   setDocInfo(docInfo);
 }
 
-const getAvailableSlots = async () =>{
- setDocSlots([])
- // getting current date
+const getAvailableSlots = async () => {
+  setDocSlots([]);
+  let today = new Date();
 
- let today = new Date()
+  for (let i = 0; i < 7; i++) {
+    let currentDate = new Date(today);
+    currentDate.setDate(today.getDate() + i);
 
- for (let i=0;i<7;i++){
+    let dateSlots = [];
 
-  let currentDate= new Date(today);
-  currentDate.setDate(today.getDate() + i)
+    // Time intervals for one day
+    const intervals = [
+      { start: "09:30", end: "13:00" },
+      { start: "15:00", end: "17:00" },
+      { start: "19:00", end: "21:00" },
+    ];
 
-  let endTime = new Date()
-  endTime.setDate(today.getDate() +i)
-  endTime.setHours(21,0,0,0)
+    for (const interval of intervals) {
+      // Create start and end times for this interval
+      const [startHour, startMinute] = interval.start.split(":").map(Number);
+      const [endHour, endMinute] = interval.end.split(":").map(Number);
 
-  if (today.getDate() === currentDate.getDate()){
-   currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() +1 :10)
-   currentDate.setMinutes(currentDate.getMinutes() > 60 ? 60 : 0) 
+      let slotStart = new Date(currentDate);
+      slotStart.setHours(startHour, startMinute, 0, 0);
+
+      let slotEnd = new Date(currentDate);
+      slotEnd.setHours(endHour, endMinute, 0, 0);
+
+      // Skip past slots for today
+      if (i === 0 && slotStart < new Date()) {
+        slotStart = new Date();
+        slotStart.setMinutes(Math.ceil(slotStart.getMinutes() / 30) * 30); // round up to next half hour
+      }
+
+      // Generate 30-minute slots
+      while (slotStart < slotEnd) {
+        const formattedTime = slotStart.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        dateSlots.push({
+          datetime: new Date(slotStart),
+          time: formattedTime,
+        });
+
+        slotStart.setMinutes(slotStart.getMinutes() + 30);
+      }
+    }
+
+    setDocSlots((prev) => [...prev, dateSlots]);
   }
-  else{
-    currentDate.setHours(10)
-    currentDate.setMinutes(0)
-  }
+};
 
-  let timeSlots = []
-
-while (currentDate < endTime){
-  let formattedTime = currentDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
-  timeSlots.push({
-    datetime : new Date(currentDate),
-    time : formattedTime
-  })
-
-  currentDate.setMinutes(currentDate.getMinutes() +60)
-}
-setDocSlots(prev => ([...prev,timeSlots]))
-
- }
-
-}
 
 const bookAppointment = async ()=> {
   if(!token){
@@ -176,7 +190,7 @@ useEffect(()=>{
           <button
             key={index}
             onClick={() => setSlotTime(item.time)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all transform duration-200 flex-shrink-0
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all transform duration-200 flex-shrink-0 mb-4
               ${
                 slotTime === item.time
                   ? "bg-blue-100 text-blue-700 border border-blue-300 scale-105"

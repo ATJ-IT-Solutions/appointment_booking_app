@@ -29,11 +29,7 @@ const logout = ()=>{
                 <li className='py-1'>Home</li>
                 <hr className='border-none outline-none h-0.5 w-3/5 m-auto'/>
             </NavLink >
-            <NavLink >
-                <li className='py-1'> Doctors</li>
-                <hr className='border-none outline-none h-0.5 w-3/5 m-auto'/>
-            </NavLink>
-            <NavLink>
+            <NavLink to='/contact'>
                 <li className='py-1'>Contact</li>
                 <hr className='border-none outline-none h-0.5 w-3/5 m-auto'/>
             </NavLink>

@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import './assets/css/App.css';
 import './assets/css/lineicons.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Contact from './pages/Contact';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
     <Navbar/>
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/doctors' element={<Doctors/>}/>
+      <Route path='/contact' element={<Contact/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/my-profile' element={<MyProfile/>}/>
       <Route path='/my-appointments' element={<MyAppointments/>}/>
