@@ -25,7 +25,7 @@ const Home = () => {
   <div className="relative z-10 container mx-auto px-6 text-white">
     <div className="max-w-2xl">
       <p className="text-sm uppercase tracking-wide mb-2"></p>
-      <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 mt-15 md:mt-0">
+      <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 mt-5 md:mt-0">
         Our experts make your <br />health better
       </h1>
       <p className="mb-8 text-lg text-gray-200">

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect, useRef } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext';
 const logo = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751829062/sibi_logo_lc6q6h.png'
@@ -20,6 +20,19 @@ const logout = ()=>{
     localStorage.removeItem('token')
 }
 
+const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className='flex items-center justify-around text-sm py-4 mb-5 section-color'>
@@ -36,19 +49,47 @@ const logout = ()=>{
         </ul>
         <div className='flex items-center'>
         {
-            token ? <div className='flex items-center gap-2 cursor-pointer group relative'>
-                 <img className="w-10 rounded-full" src={avatar} alt="" />
-                 <img className="w-2.5" src={dropdown} alt="" />
-                 <div className='absolute top-0 right-0 pt-14 text-base font-medium text-grey-600 z-20 hidden group-hover:block'>
-                    <div className='min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4'>
-                        <p onClick={()=> navigate('/my-profile')} className='hover:text-black-600 cursor-pointer'>My Profile</p>
-                        <p onClick={()=> navigate('/my-appointments')} className='hover:text-black-600 cursor-pointer'>My Appointment</p>
-                        <p onClick={()=> logout()} className='hover:text-black-600 cursor-pointer'>Logout</p>
-        
-                    </div>
-                 </div>
+            token ? <div
+          className="flex items-center gap-2 cursor-pointer relative"
+          onClick={() => setIsOpen((prev) => !prev)}
+          ref={dropdownRef}
+        >
+          <img className="w-10 rounded-full" src={avatar} alt="avatar" />
+          <img className="w-2.5" src={dropdown} alt="dropdown icon" />
+
+          {isOpen && (
+            <div className="absolute top-12 right-0 z-20 min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4 text-base font-medium text-gray-600 shadow-md">
+              <p
+                onClick={() => {
+                  setIsOpen(false);
+                  navigate("/my-profile");
+                }}
+                className="hover:text-black cursor-pointer"
+              >
+                My Profile
+              </p>
+              <p
+                onClick={() => {
+                  setIsOpen(false);
+                  navigate("/my-appointments");
+                }}
+                className="hover:text-black cursor-pointer"
+              >
+                My Appointment
+              </p>
+              <p
+                onClick={() => {
+                  setIsOpen(false);
+                  logout();
+                }}
+                className="hover:text-black cursor-pointer"
+              >
+                Logout
+              </p>
             </div>
-            : <button onClick={()=> { navigate('/login')}} className='bg-blue-600 text-white border border-gray-400 rounded-full px-8 py-3 hover:bg-blue-400'>Create An Account</button>
+          )}
+        </div>
+            : <button onClick={()=> { navigate('/login')}} className='bg-blue-600 text-white border border-gray-400 rounded-full px-8 py-3 hover:bg-blue-400'>Login/Sign Up</button>
 
         }
         <img onClick={()=>setShowMenu(true)} className='w-12 md:hidden ml-5 cursor-pointer' alt='a' src={menuicon} />
