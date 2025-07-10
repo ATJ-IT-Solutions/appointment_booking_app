@@ -3,6 +3,8 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const Login = () => {
 const {backendUrl, token, setToken} = useContext(AppContext)
@@ -10,14 +12,15 @@ const {backendUrl, token, setToken} = useContext(AppContext)
   const [state, setState] = useState('Sign Up')
 
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState('');
 
   const SubmitHandler = async (event) =>{
     event.preventDefault()
 try{
 if(state === 'Sign Up'){
-      const {data} = await axios.post(backendUrl + '/api/user/register', {name,password,email})
+      const {data} = await axios.post(backendUrl + '/api/user/register', {name,phone})
       if (data.success){
         localStorage.setItem('token',data.token)
         setToken(data.token)
@@ -26,7 +29,7 @@ if(state === 'Sign Up'){
       }
     }else{
 
-         const {data} = await axios.post(backendUrl + '/api/user/login', {email,password})
+         const {data} = await axios.post(backendUrl + '/api/user/login', {phone})
       if (data.success){
         localStorage.setItem('token',data.token)
         setToken(data.token)
@@ -77,20 +80,38 @@ catch(error){
       </div>
     )}
 
-    {/* Email */}
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder=""
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+    {/* Phone Number */}
+<div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700 mb-1">Mobile number</label>
+  <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
+    {/* Flag & Code (visual only, but not shown in input value) */}
+    <div className="flex items-center pr-2 border-r border-gray-300">
+      <img
+        src="https://flagcdn.com/w40/in.png"
+        alt="IN"
+        className="w-5 h-5 mr-1 rounded-sm"
       />
+      <span className="text-gray-700 text-sm">+91</span>
     </div>
 
+    {/* Actual Input Field */}
+    <input
+      type="tel"
+      value={phone}
+      onChange={(e) => {
+        const val = e.target.value.replace(/\D/g, ''); // remove non-numeric
+        if (val.length <= 10) setPhone(val);
+      }}
+      className="flex-1 pl-3 outline-none text-sm text-gray-800"
+      inputMode="numeric"
+      pattern="[0-9]*"
+      maxLength={10}
+    />
+  </div>
+</div>
+
     {/* Password */}
-    <div className="mb-6">
+    {/* <div className="mb-6">
       <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
       <input
         type="password"
@@ -99,7 +120,7 @@ catch(error){
         placeholder=""
         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
       />
-    </div>
+    </div> */}
 
     {/* Submit Button */}
     <button

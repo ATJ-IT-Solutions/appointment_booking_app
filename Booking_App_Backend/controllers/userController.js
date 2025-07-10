@@ -5,37 +5,37 @@ import jwt from 'jsonwebtoken'
 import doctorModel from '../models/doctorModel.js'
 import appointmentModel from '../models/appointmentModel.js'
 import sendMail from './emailController.js'
-import twilio from 'twilio';
+import fast2sms from 'fast-two-sms';
 
 
 // API to register user
 
 const registerUser = async (req,res) =>{
     try{
+   console.log(req.body);
+        const {name,phone} =req.body
 
-        const {name,email,password} =req.body
-
-        if(!name || !email || !password){
+        if(!name || !phone){
           return res.json({success:false,message:"Missing details!"})
         }
 
-        if (!validator.isEmail(email)){
-          return res.json({success:false,message:"Please enter valid email!"})
+        // if (!validator.isEmail(email)){
+        //   return res.json({success:false,message:"Please enter valid email!"})
 
-        }
+        // }
 
-        if (password.length < 8){
-          return res.json({success:false,message:"Please a strong password..(more than 8 characters)!"})
+        // if (password.length < 8){
+        //   return res.json({success:false,message:"Please a strong password..(more than 8 characters)!"})
 
-        }
+        // }
 
         // hashing user password
-        const salt =  await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(password,salt)
+        // const salt =  await bcrypt.genSalt(10)
+        // const hashedPassword = await bcrypt.hash(password,salt)
 
         const userData = {
-            name, email ,
-            password: hashedPassword
+            name, phone 
+            // ,password: hashedPassword
         }
 
         const newUser= new userModel(userData)
@@ -56,18 +56,20 @@ const registerUser = async (req,res) =>{
 // API for user login
 const loginUser = async(req,res) => {
   try {
-    const {email,password} = req.body
-    const user = await userModel.findOne({email})
+    const {phone} = req.body
+    const cleanedPhone = phone.trim().replace(/\D/g, '');
+    const user = await userModel.findOne({phone:cleanedPhone})
+   
     if(!user){
       return res.json({success:false,message:"User does not exist!"})
     }
 
-    const isMatch = await bcrypt.compare(password,user.password)
-    if(isMatch){
+    // const isMatch = await bcrypt.compare(password,user.password)
+    if(user){
       const token = jwt.sign({id:user._id},process.env.TOKEN_SECRET)
       res.json({success:true,token})
     }else{
-      res.json({success:false,message:"Invalid Password!"})
+      res.json({success:false,message:"Invalid Phone Number!"})
     }
   }
   catch(error){
@@ -112,7 +114,7 @@ const updateProfile = async (req,res)=>{
 }
 
 const bookAppointment = async (req,res)=> {
-const client = new twilio('ACf7ee4abf96aa324ba630043c46ff9109','f3ceee7a2f0737602eaf99c948435cb4');
+const fastAPI = 'ujByv0zpaa3I8SMEOuKxaPUzIbzzZkG9kqi9I7dC65KprIGAhpaXuWYBDw3L';
   try{
 
     const {userId, docId, slotDate, slotTime} = req.body
@@ -152,19 +154,19 @@ const client = new twilio('ACf7ee4abf96aa324ba630043c46ff9109','f3ceee7a2f073760
 
     //send email to user
 
-    const emailSubject = "Appointment Confirmation"
-    const emailText = `Hi {userData.name}, your appointment with Dr. Sibi is confirmed for {slotDate} at {slotTime}`
-    const emailHtml = `
-  <h2>Appointment Confirmed</h2>
-  <p>Hello <strong>${userData.name}</strong>,</p>
-  <p>Your appointment with <strong>Dr. ${docData.name}</strong> has been confirmed.</p>
-  <ul>
-    <li><strong>Date:</strong> ${slotDate}</li>
-    <li><strong>Time:</strong> ${slotTime}</li>
-  </ul>
-  <p>Thank you for using our service.</p> `;
+  //   const emailSubject = "Appointment Confirmation"
+  //   const emailText = `Hi {userData.name}, your appointment with Dr. Sibi is confirmed for {slotDate} at {slotTime}`
+  //   const emailHtml = `
+  // <h2>Appointment Confirmed</h2>
+  // <p>Hello <strong>${userData.name}</strong>,</p>
+  // <p>Your appointment with <strong>Dr. ${docData.name}</strong> has been confirmed.</p>
+  // <ul>
+  //   <li><strong>Date:</strong> ${slotDate}</li>
+  //   <li><strong>Time:</strong> ${slotTime}</li>
+  // </ul>
+  // <p>Thank you for using our service.</p> `;
 
-  await sendMail(userData.email,emailSubject,emailText,emailHtml)
+  // await sendMail(userData.email,emailSubject,emailText,emailHtml)
 
   //send email to doctor
      const emailSubjectDoc = "Appointment Request"
@@ -180,17 +182,29 @@ const client = new twilio('ACf7ee4abf96aa324ba630043c46ff9109','f3ceee7a2f073760
 
   await sendMail(docData.email,emailSubjectDoc,emailTextDoc,emailHtmlDoc)
 
-  client.messages
-    .create({
-                from: 'whatsapp:+14155238886',
+  // client.messages
+  //   .create({
+  //               from: 'whatsapp:+14155238886',
      
-     body: `Hi ${docData.name}, new appointment request for ${slotDate} at ${slotTime}. Patient name : ${userData.name}`,
-        to: 'whatsapp:+919539539764'
-    })
+  //    body: `Hi ${docData.name}, new appointment request for ${slotDate} at ${slotTime}. Patient name : ${userData.name}`,
+  //       to: 'whatsapp:+919539539764'
+  //   })
 
-     .then(message => console.log(message.sid))
-  .catch(err => console.error(err));
+  //    .then(message => console.log(message.sid))
+  // .catch(err => console.error(err));
 
+  var options = {authorization : 'ujByv0zpaa3I8SMEOuKxaPUzIbzzZkG9kqi9I7dC65KprIGAhpaXuWYBDw3L' , message : 'Hi' ,  numbers : ['9539539764']} 
+  // Function to send SMS
+  const smsSend = async ()=> {
+  try {
+    console.log('Sending SMS with options:', options);
+    const response = await fast2sms.sendMessage(options);
+    console.log('Fast2SMS Response:', response);
+  } catch (error) {
+    console.error('Error sending SMS:', error.response || error.message || error);
+  }
+}
+smsSend();
     //save new slot in doctor data
     await doctorModel.findByIdAndUpdate(docId,{slots_booked})
 
