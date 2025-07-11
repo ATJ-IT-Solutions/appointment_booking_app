@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 import doctorModel from '../models/doctorModel.js'
 import appointmentModel from '../models/appointmentModel.js'
 import sendMail from './emailController.js'
+import dotenv from 'dotenv';
+dotenv.config();
 // import fast2sms from 'fast-two-sms';
 
 
@@ -50,7 +52,7 @@ const loginUser = async(req,res) => {
 
     // const isMatch = await bcrypt.compare(password,user.password)
     if(user){
-      const token = jwt.sign({id:user._id},'drsecret')
+      const token = jwt.sign({id:user._id},process.env.TOKEN_SECRET)
       res.json({success:true,token})
     }else{
       res.json({success:false,message:"Invalid Phone Number!"})
