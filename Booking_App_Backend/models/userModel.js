@@ -10,6 +10,6 @@ const userSchema = new mongoose.Schema({
     phone: {type:String,required:true,unique:true}
 })
 
-const userModel = mongoose.models.userModel || mongoose.model('user',userSchema)
+const userModel = mongoose.models.userModel || mongoose.model('users',userSchema)
 
 export default userModel
