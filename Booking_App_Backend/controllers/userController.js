@@ -27,7 +27,7 @@ const registerUser = async (req,res) =>{
         const newUser= new userModel(userData)
         const user = await newUser.save()
 
-        const token = jwt.sign({id: user._id},process.env.TOKEN_SECRET)
+        const token = jwt.sign({id: user._id},'drsecret')
 
         res.json({success:true,token})
 
@@ -52,7 +52,7 @@ const loginUser = async(req,res) => {
 
     // const isMatch = await bcrypt.compare(password,user.password)
     if(user){
-      const token = jwt.sign({id:user._id},process.env.TOKEN_SECRET)
+      const token = jwt.sign({id:user._id},'drsecret')
       res.json({success:true,token})
     }else{
       res.json({success:false,message:"Invalid Phone Number!"})
