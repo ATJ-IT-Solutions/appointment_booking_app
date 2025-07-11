@@ -12,30 +12,14 @@ import fast2sms from 'fast-two-sms';
 
 const registerUser = async (req,res) =>{
     try{
-   console.log(req.body);
         const {name,phone} =req.body
 
         if(!name || !phone){
           return res.json({success:false,message:"Missing details!"})
         }
 
-        // if (!validator.isEmail(email)){
-        //   return res.json({success:false,message:"Please enter valid email!"})
-
-        // }
-
-        // if (password.length < 8){
-        //   return res.json({success:false,message:"Please a strong password..(more than 8 characters)!"})
-
-        // }
-
-        // hashing user password
-        // const salt =  await bcrypt.genSalt(10)
-        // const hashedPassword = await bcrypt.hash(password,salt)
-
         const userData = {
             name, phone 
-            // ,password: hashedPassword
         }
 
         const newUser= new userModel(userData)
