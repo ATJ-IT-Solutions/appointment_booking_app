@@ -16,6 +16,10 @@ connectCloudinary()
 
 app.use(express.json())
 app.use(cors())
+app.use(cors({
+  origin: "https://appointment-booking-app-frontend202.vercel.app", // ✅ this must match EXACTLY
+  credentials: true // if using cookies or auth headers
+}));
 app.use('/uploads', express.static('uploads'));
 //api endpoints
 app.use('/api/admin',adminRouter)
