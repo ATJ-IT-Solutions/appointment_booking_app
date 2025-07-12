@@ -159,7 +159,7 @@ useEffect(()=>{
 
   {/* Booking Section */}
   <div className="mt-12 animate-fade-in">
-    <h4 className="text-xl font-semibold text-gray-800 mb-3">🗓️ Booking Slots</h4>
+    <h4 className="text-xl font-semibold text-gray-800 mb-3">🗓️ Booking Date & Time</h4>
 
     {/* Date Pills */}
     <div className="flex overflow-x-auto gap-4 pb-3 scrollbar-hide">
