@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext.jsx';
-const profile = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828973/profile_r0ndlc.jpg'
+const profile = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1752347005/sibi_img_new_1_c4kttu.jpg'
 const banner = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1751828863/banner_1_bb0urc.png'
 const Home = () => {
   const navigate = useNavigate();

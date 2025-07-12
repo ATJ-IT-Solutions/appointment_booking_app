@@ -6,6 +6,7 @@ import doctorModel from '../models/doctorModel.js'
 import appointmentModel from '../models/appointmentModel.js'
 import sendMail from './emailController.js'
 import dotenv from 'dotenv';
+import sendMessage from './smsController.js';
 dotenv.config();
 // import fast2sms from 'fast-two-sms';
 
@@ -168,6 +169,7 @@ const fastAPI = 'ujByv0zpaa3I8SMEOuKxaPUzIbzzZkG9kqi9I7dC65KprIGAhpaXuWYBDw3L';
 
   await sendMail(docData.email,emailSubjectDoc,emailTextDoc,emailHtmlDoc)
 
+  await sendMessage()
   // client.messages
   //   .create({
   //               from: 'whatsapp:+14155238886',
