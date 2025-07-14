@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-const profile = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1752347005/sibi_img_new_1_c4kttu.jpg'
+const profile = 'https://res.cloudinary.com/duz6kitlg/image/upload/v1752521759/sibi_img_homr_zylbol.png'
 
 const Appointment = () => {
 
